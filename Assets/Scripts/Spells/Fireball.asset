@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51c189a6cb0f37241930bf578c570806, type: 3}
+  m_Name: Fireball
+  m_EditorClassIdentifier: 
+  SpellName: Fireball
+  DamageAmount: 10
+  ManaCost: 5
+  Lifetime: 4
+  Speed: 25
+  SpellRadius: 2
+  SpellAudioCast: {fileID: 8300000, guid: d3acc8cd26f5d3e4fbe4602e2249c390, type: 3}
+  SpellAudioHit: {fileID: 8300000, guid: 6a2c696e9ec4eb54d8ee2865daafb642, type: 3}
+  Cooldown: 1
+  SpellIcon: {fileID: 2800000, guid: 2bab19c759afa49488b5021c212db637, type: 3}
+  SpellPrefab: {fileID: 7248391995839134062, guid: e80a6c7962fb97c46894f48caab75869, type: 3}
+  SpellCollisionParticles: {fileID: 4652775306817148758, guid: 4430d84ef1f40454a8b7ee8f50a5add1, type: 3}
