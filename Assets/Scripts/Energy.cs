@@ -14,7 +14,7 @@ public class Energy : MonoBehaviour
         if(playerInventory != null)
         {
             playerInventory.EnergyCollected();
-            Destroy(gameObject, 10f);
+            Destroy(gameObject);
         }
     }
     private void Update() {
