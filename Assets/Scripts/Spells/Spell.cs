@@ -30,6 +30,8 @@ public class Spell : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
         AudioSource.PlayClipAtPoint(SpellToCast.SpellAudioHit, other.transform.position);
+        GameObject collisionParticles = GameObject.Instantiate(SpellToCast.SpellCollisionParticles, transform.position, Quaternion.identity);
+        Destroy(collisionParticles, 1f);
         if(other.gameObject.CompareTag("Enemy"))
         {
             HealthComponent enemyHealth = other.GetComponent<HealthComponent>();

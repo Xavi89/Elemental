@@ -7,8 +7,6 @@ using TMPro;
 
 public class SpellCastingController : MonoBehaviour
 {
-    public SpellScriptableObject SpellToCast;
-
     public Image fireSpellImage;
     public TMP_Text fireSpellText;
     

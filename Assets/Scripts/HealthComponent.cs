@@ -10,6 +10,8 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private Image healthBarImage;
     [SerializeField] private Material onHitMaterial;
     private Material initialMaterial;
+    [SerializeField] private GameObject energyPrefab;
+
 
     private void Start()
     {
@@ -23,7 +25,10 @@ public class HealthComponent : MonoBehaviour
     public void TakeDamage(float damageToApply)
     {
         currentHealth -= damageToApply;
-        if (currentHealth <= 0) Destroy(this.gameObject);
+        if (currentHealth <= 0){
+            Destroy(this.gameObject);
+            GameObject energy = GameObject.Instantiate(energyPrefab, this.gameObject.transform.position, Quaternion.identity);
+        }
         healthBarImage.fillAmount = currentHealth / MaxHealth;
         GetComponent<Renderer>().material = onHitMaterial;
         Invoke("ChangeToInitialMaterial", .05f);
