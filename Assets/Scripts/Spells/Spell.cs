@@ -11,6 +11,7 @@ public class Spell : MonoBehaviour
     private SphereCollider myCollider;
     private Rigidbody myRigidbody;
 
+
     private void Awake() {
         myCollider = GetComponent<SphereCollider>();
         myCollider.isTrigger = true;

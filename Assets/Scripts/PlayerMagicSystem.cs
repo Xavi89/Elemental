@@ -11,6 +11,8 @@ public class PlayerMagicSystem : MonoBehaviour
     private float currentManaRechargeTimer;
     [SerializeField] private float currentCastTimer;
     [SerializeField] private Transform castPoint;
+    [SerializeField] private TMP_Text textCooldown;
+    [SerializeField] private Image iconCooldown;
 
     [Header("Mana")]
     [SerializeField] private float maxMana = 100f;
@@ -21,7 +23,6 @@ public class PlayerMagicSystem : MonoBehaviour
     [SerializeField] private TextMeshProUGUI manaText;
 
 
-
     private bool castingMagic = false;
 
     private PlayerControls playerControls;
@@ -30,6 +31,8 @@ public class PlayerMagicSystem : MonoBehaviour
     {
         playerControls = new PlayerControls();
         currentMana = maxMana;
+        textCooldown.text = "";
+        iconCooldown.fillAmount = 0;
     }
 
     private void OnEnable()
@@ -61,8 +64,19 @@ public class PlayerMagicSystem : MonoBehaviour
             currentCastTimer += Time.deltaTime;
             if(currentCastTimer > spellToCast.SpellToCast.Cooldown) castingMagic = false;
 
+            if(spellToCast.SpellToCast.Cooldown - currentCastTimer > 0 )
+            {
+                textCooldown.enabled = true;
+                iconCooldown.enabled = true;
+                textCooldown.text = (spellToCast.SpellToCast.Cooldown - currentCastTimer).ToString("F1");
+                iconCooldown.fillAmount = (spellToCast.SpellToCast.Cooldown - currentCastTimer) / spellToCast.SpellToCast.Cooldown;
+            } else
+            {
+                textCooldown.enabled = false;
+                iconCooldown.enabled = false;
+            } 
         }
-        if(currentMana < maxMana && !castingMagic && !isSpellCastHeldDown)
+        if(currentMana < maxMana)
         {
             currentManaRechargeTimer += Time.deltaTime;
             if(currentManaRechargeTimer > timeToWaitForManaRecharge)

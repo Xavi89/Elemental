@@ -16,11 +16,11 @@ MonoBehaviour:
   DamageAmount: 5
   ManaCost: 2
   Lifetime: 2
-  Speed: 25
+  Speed: 50
   SpellRadius: 1
-  SpellAudioCast: {fileID: 0}
-  SpellAudioHit: {fileID: 0}
+  SpellAudioCast: {fileID: 8300000, guid: d3acc8cd26f5d3e4fbe4602e2249c390, type: 3}
+  SpellAudioHit: {fileID: 8300000, guid: 17701c8261e50d142a7915da633a1f7d, type: 3}
   Cooldown: 0.5
   SpellIcon: {fileID: 0}
-  SpellPrefab: {fileID: 0}
-  SpellCollisionParticles: {fileID: 0}
+  SpellPrefab: {fileID: 9138914774888958848, guid: db2c2e63819c234499e762de97963756, type: 3}
+  SpellCollisionParticles: {fileID: 4652775306817148758, guid: 4430d84ef1f40454a8b7ee8f50a5add1, type: 3}

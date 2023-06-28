@@ -14,6 +14,7 @@ public class SpellScriptableObject : ScriptableObject
     public float Lifetime = 2f;
     public float Speed = 15f;
     public float SpellRadius = 1f;
+    public float CastingTime = 0f;
     public AudioClip SpellAudioCast;
     public AudioClip SpellAudioHit;
     public float Cooldown = 1f;
@@ -23,5 +24,4 @@ public class SpellScriptableObject : ScriptableObject
 
     // Element School
     // Status effect
-    // Time between casts
 }

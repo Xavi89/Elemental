@@ -14,10 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   SpellName: Fireball
   DamageAmount: 10
-  ManaCost: 5
+  ManaCost: 25
   Lifetime: 4
   Speed: 25
   SpellRadius: 2
+  CastingTime: 5
   SpellAudioCast: {fileID: 8300000, guid: d3acc8cd26f5d3e4fbe4602e2249c390, type: 3}
   SpellAudioHit: {fileID: 8300000, guid: 17701c8261e50d142a7915da633a1f7d, type: 3}
   Cooldown: 1
