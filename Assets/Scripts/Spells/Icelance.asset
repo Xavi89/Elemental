@@ -15,14 +15,14 @@ MonoBehaviour:
   SpellName: Icelance
   DamageAmount: 5
   ManaCost: 2
-  Lifetime: 2
+  Lifetime: 5
   HitMissLifetime: 100
   Speed: 100
   SpellRadius: 1
   CastingTime: 0
   SpellAudioCast: {fileID: 8300000, guid: d3acc8cd26f5d3e4fbe4602e2249c390, type: 3}
   SpellAudioHit: {fileID: 8300000, guid: 17701c8261e50d142a7915da633a1f7d, type: 3}
-  Cooldown: 0.5
+  Cooldown: 0.2
   SpellIcon: {fileID: 2800000, guid: fe6ee25278fff5d419a5ce00cdb5e128, type: 3}
   SpellPrefab: {fileID: 7248391995839134062, guid: fd437ee18545ecc47b0f8c859e40145c, type: 3}
   SpellCollisionParticles: {fileID: 4652775306817148758, guid: 4430d84ef1f40454a8b7ee8f50a5add1, type: 3}

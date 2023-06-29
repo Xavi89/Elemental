@@ -86,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
+  m_PresetInfoIsWorld: 0
 --- !u!114 &7425748298127921600
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,27 +170,18 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0
       value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     - serializedVersion: 3
-      time: 0.22545707
-      value: 1.0339596
-      inSlope: 0.5927043
-      outSlope: 0.5927043
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0.7547753
-    - serializedVersion: 3
-      time: 0.98174644
-      value: 0.7194924
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
+      time: 1
+      value: 1
+      inSlope: 1
+      outSlope: 1
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0

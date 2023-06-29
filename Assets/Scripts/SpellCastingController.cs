@@ -60,7 +60,7 @@ public class SpellCastingController : MonoBehaviour
     {
         manaText.text = currentMana.ToString("F0") + " / " + maxMana.ToString("F0");
         manaBarImage.fillAmount = currentMana/maxMana;
-        bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0.1;
+        bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0;
         bool hasEnoughMana = currentMana - SpellToCast.ManaCost >= 0f;
         if(!castingMagic && isSpellCastHeldDown && hasEnoughMana)
         {
