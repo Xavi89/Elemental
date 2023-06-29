@@ -43,7 +43,7 @@ Light:
   serializedVersion: 10
   m_Type: 2
   m_Shape: 0
-  m_Color: {r: 1, g: 0.76640767, b: 0.6367924, a: 1}
+  m_Color: {r: 0.5330188, g: 0.8913232, b: 1, a: 1}
   m_Intensity: 1
   m_Range: 4
   m_SpotAngle: 30
@@ -112,7 +112,7 @@ GameObject:
   - component: {fileID: 1124476843256828529}
   - component: {fileID: 7929205281783871426}
   m_Layer: 2
-  m_Name: Bullet
+  m_Name: Bullet_Icelance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -127,8 +127,8 @@ Transform:
   m_GameObject: {fileID: 7248391995839134062}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.45084435, y: -0.70911443, z: 0}
-  m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.05, y: 0.05, z: 0.5}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5445212760779503875}
   - {fileID: 555829940772613445}
@@ -163,7 +163,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c208933495b94c5418d106977a69b3b5, type: 2}
+  - {fileID: 2100000, guid: 2f34efa73f20523438d4082dd15bf9c0, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -218,7 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c960845e4361c546996a8e0a9fa5df9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: ffc1c7bf9094d6444bee1e2b9ffa3637, type: 2}
+  SpellToCast: {fileID: 11400000, guid: 76c9ad15d48911b46a51646ca35f8332, type: 2}
 --- !u!96 &8183901110418243327
 TrailRenderer:
   serializedVersion: 3
@@ -262,7 +262,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 0.2
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1
@@ -5323,7 +5323,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 1
+      scalar: 2
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -5441,8 +5441,8 @@ ParticleSystem:
     startSize:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.05
-      minScalar: 0.15
+      scalar: 0.1
+      minScalar: 0.2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -6024,7 +6024,7 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 100
+      scalar: 50
       minScalar: 10
       maxCurve:
         serializedVersion: 2
@@ -7848,7 +7848,7 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
   NoiseModule:
-    enabled: 0
+    enabled: 1
     strength:
       serializedVersion: 2
       minMaxState: 0

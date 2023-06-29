@@ -16,7 +16,7 @@ public class PlayerMagicSystem : MonoBehaviour
 
     [Header("Mana")]
     [SerializeField] private float maxMana = 100f;
-    [SerializeField] private float currentMana;
+    [SerializeField] public float currentMana;
     [SerializeField] private float manaRechargeRate = 10f;
     [SerializeField] private float timeToWaitForManaRecharge = 1f;
     [SerializeField] private Image manaBarImage;

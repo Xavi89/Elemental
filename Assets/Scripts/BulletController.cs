@@ -6,24 +6,21 @@ public class BulletController : MonoBehaviour
 {
     public SpellScriptableObject SpellToCast;
 
-    [SerializeField] private GameObject bulletDecal;
-    private float speed = 80f;
-    private float timeToDestroy = 3f;
-
     public Vector3 target {get; set;}
     public bool hit {get; set;}
 
     private void onEnable()
     {
-        Destroy(gameObject, timeToDestroy);
+        Destroy(gameObject, SpellToCast.Lifetime);
     }
 
     void Update()
     {
-        transform.position = Vector3.MoveTowards(transform.position, target, speed * Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, target, SpellToCast.Speed * Time.deltaTime);
         if(!hit && Vector3.Distance(transform.position, target) < .1f ){
             Destroy(gameObject);
         }
+        Destroy(gameObject, SpellToCast.Lifetime);
     }
     private void OnCollisionEnter(Collision other) {
         if(other.gameObject.CompareTag("Enemy"))
@@ -32,8 +29,8 @@ public class BulletController : MonoBehaviour
             if(SpellToCast.DamageAmount > 0) enemyHealth.TakeDamage(SpellToCast.DamageAmount);
         }
         ContactPoint contact = other.GetContact(0);
-        var bulletDecalInstance = Instantiate(bulletDecal, contact.point + contact.normal * 0.001f, Quaternion.LookRotation(contact.normal));
-        Destroy(bulletDecalInstance, 1f);
+        var spellCollision = Instantiate(SpellToCast.SpellCollisionParticles, contact.point + contact.normal * 0.001f, Quaternion.LookRotation(contact.normal));
+        Destroy(spellCollision, 1f);
         Destroy(gameObject);
     }
 }

@@ -12,6 +12,7 @@ public class SpellScriptableObject : ScriptableObject
     public float DamageAmount = 10f;
     public float ManaCost = 5f;
     public float Lifetime = 2f;
+    public float HitMissLifetime = 100f;
     public float Speed = 15f;
     public float SpellRadius = 1f;
     public float CastingTime = 0f;

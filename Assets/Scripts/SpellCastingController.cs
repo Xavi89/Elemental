@@ -1,3 +1,6 @@
+
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -7,15 +10,16 @@ using TMPro;
 
 public class SpellCastingController : MonoBehaviour
 {
+    [SerializeField] public SpellScriptableObject SpellToCast;
+
     public Image fireSpellImage;
     public TMP_Text fireSpellText;
     
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform barrelTransform;
+    [SerializeField] private Transform castPoint;
     [SerializeField] private Transform bulletParent;
-    [SerializeField] private float bulletHitMissDistance = 100f;
     [SerializeField] private LayerMask PlayerLayerMask;
     [SerializeField] private Cooldown fireCooldown;
+    
     public float fireSpellCooldown;
     private bool isFireSpellCooldown = false;
     private float currentFireSpellCooldown;
@@ -26,6 +30,7 @@ public class SpellCastingController : MonoBehaviour
     private Transform cameraTransform;
 
     private InputAction shootAction;
+    private PlayerMagicSystem manaSystem;
 
     private void Awake()
     {
@@ -38,6 +43,7 @@ public class SpellCastingController : MonoBehaviour
 
     void Start()
     {
+        manaSystem = GetComponent<PlayerMagicSystem>();
         fireSpellImage.fillAmount = 0;
         fireSpellText.text = "";
     }
@@ -51,6 +57,7 @@ public class SpellCastingController : MonoBehaviour
         if(shootAction.triggered && !isFireSpellCooldown){
             isFireSpellCooldown = true;
             currentFireSpellCooldown = fireSpellCooldown;
+            // manaSystem.currentMana = manaSystem.currentMana - 10;
         }
     }
 
@@ -65,18 +72,18 @@ public class SpellCastingController : MonoBehaviour
     private void CastPrimarySpell(){
         if(fireCooldown.IsCoolingDown) return;
         RaycastHit hit;
-        GameObject bullet = GameObject.Instantiate(bulletPrefab, barrelTransform.position, Quaternion.identity, bulletParent);
+        GameObject bullet = GameObject.Instantiate(SpellToCast.SpellPrefab, castPoint.position, castPoint.rotation, bulletParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, PlayerLayerMask)){
             bulletController.target = hit.point;
             bulletController.hit = true;
         }
         else {
-            bulletController.target = cameraTransform.position + cameraTransform.forward * bulletHitMissDistance;
+            bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast.HitMissLifetime;
             bulletController.hit = false;
         }
-        float iTweenDistance = Vector3.Distance(hit.point, barrelTransform.transform.position);
-        iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
+        // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
+        // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
         fireCooldown.StartCooldown();
     }
 

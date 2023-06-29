@@ -4947,6 +4947,7 @@ GameObject:
   - component: {fileID: 1741812929701353118}
   - component: {fileID: 8972661508025001573}
   - component: {fileID: -3650867226186662688}
+  - component: {fileID: 4022500810259768311}
   m_Layer: 0
   m_Name: Spell_Icelance
   m_TagString: Untagged
@@ -5181,3 +5182,16 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4022500810259768311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9138914774888958848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c960845e4361c546996a8e0a9fa5df9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  SpellToCast: {fileID: 11400000, guid: 76c9ad15d48911b46a51646ca35f8332, type: 2}
