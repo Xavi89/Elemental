@@ -17,7 +17,7 @@ MonoBehaviour:
   ManaCost: 10
   Lifetime: 2
   HitMissLifetime: 100
-  Speed: 40
+  Speed: 60
   SpellRadius: 2
   CastingTime: 5
   SpellAudioCast: {fileID: 8300000, guid: d3acc8cd26f5d3e4fbe4602e2249c390, type: 3}

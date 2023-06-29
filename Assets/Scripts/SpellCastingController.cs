@@ -50,14 +50,15 @@ public class SpellCastingController : MonoBehaviour
 
     void Update()
     {
-        FireSpell();
+        if(shootAction.ReadValue<float>() > 0) FireSpell();
+        // FireSpell();
         SpellCooldown(ref currentFireSpellCooldown, fireSpellCooldown, ref isFireSpellCooldown, fireSpellImage, fireSpellText);
     }
     private void FireSpell(){
-        if(shootAction.triggered && !isFireSpellCooldown){
+        if(shootAction.triggered && !isFireSpellCooldown && manaSystem.currentMana >= SpellToCast.ManaCost){
             isFireSpellCooldown = true;
             currentFireSpellCooldown = fireSpellCooldown;
-            // manaSystem.currentMana = manaSystem.currentMana - 10;
+            manaSystem.currentMana = manaSystem.currentMana - SpellToCast.ManaCost;
         }
     }
 
