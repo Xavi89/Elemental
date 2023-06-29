@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,26 +10,32 @@ using TMPro;
 public class SpellCastingController : MonoBehaviour
 {
     [SerializeField] public SpellScriptableObject SpellToCast;
-
-    public Image fireSpellImage;
-    public TMP_Text fireSpellText;
-    
+   
     [SerializeField] private Transform castPoint;
-    [SerializeField] private Transform bulletParent;
+    [SerializeField] private Transform spellStoreParent;
     [SerializeField] private LayerMask PlayerLayerMask;
-    [SerializeField] private Cooldown fireCooldown;
     
-    public float fireSpellCooldown;
-    private bool isFireSpellCooldown = false;
-    private float currentFireSpellCooldown;
-
     private CharacterController controller;
     private PlayerInput playerInput;
-    private Vector3 playerVelocity;
     private Transform cameraTransform;
 
     private InputAction shootAction;
     private PlayerMagicSystem manaSystem;
+
+    private bool castingMagic = false;
+    [SerializeField] private TMP_Text textCooldown;
+    [SerializeField] private Image iconCooldown;
+    [SerializeField] private float currentCastTimer;
+    private float currentManaRechargeTimer;
+
+    [Header("Mana")]
+    [SerializeField] private float maxMana = 100f;
+    [SerializeField] public float currentMana;
+    [SerializeField] private float manaRechargeRate = 10f;
+    [SerializeField] private float timeToWaitForManaRecharge = 1f;
+    [SerializeField] private Image manaBarImage;
+    [SerializeField] private TextMeshProUGUI manaText;
+
 
     private void Awake()
     {
@@ -38,42 +43,65 @@ public class SpellCastingController : MonoBehaviour
         cameraTransform = Camera.main.transform;
         shootAction = playerInput.actions["Shoot"];
 
+        textCooldown.text = "";
+        iconCooldown.fillAmount = 0;
+        currentMana = maxMana;
+
         Cursor.lockState = CursorLockMode.Locked;
     }
 
     void Start()
     {
-        manaSystem = GetComponent<PlayerMagicSystem>();
-        fireSpellImage.fillAmount = 0;
-        fireSpellText.text = "";
+        textCooldown.text = "";
+        iconCooldown.fillAmount = 0;
     }
 
     void Update()
     {
-        if(shootAction.ReadValue<float>() > 0) FireSpell();
-        // FireSpell();
-        SpellCooldown(ref currentFireSpellCooldown, fireSpellCooldown, ref isFireSpellCooldown, fireSpellImage, fireSpellText);
-    }
-    private void FireSpell(){
-        if(shootAction.triggered && !isFireSpellCooldown && manaSystem.currentMana >= SpellToCast.ManaCost){
-            isFireSpellCooldown = true;
-            currentFireSpellCooldown = fireSpellCooldown;
-            manaSystem.currentMana = manaSystem.currentMana - SpellToCast.ManaCost;
+        manaText.text = currentMana.ToString("F0") + " / " + maxMana.ToString("F0");
+        manaBarImage.fillAmount = currentMana/maxMana;
+        bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0.1;
+        bool hasEnoughMana = currentMana - SpellToCast.ManaCost >= 0f;
+        if(!castingMagic && isSpellCastHeldDown && hasEnoughMana)
+        {
+            castingMagic = true;
+            currentMana -= SpellToCast.ManaCost;
+            currentCastTimer = 0;
+            currentManaRechargeTimer = 0;
+            CastPrimarySpell();
         }
-    }
+        if(castingMagic)
+        {
+            currentCastTimer += Time.deltaTime;
+            if(currentCastTimer > SpellToCast.Cooldown) castingMagic = false;
 
-    private void OnEnable() {
-        shootAction.performed += _ => CastPrimarySpell();
-    }
-
-    private void OnDisable() {
-        shootAction.performed -= _ => CastPrimarySpell();
+            if(SpellToCast.Cooldown - currentCastTimer > 0 )
+            {
+                textCooldown.enabled = true;
+                iconCooldown.enabled = true;
+                textCooldown.text = (SpellToCast.Cooldown - currentCastTimer).ToString("F1");
+                iconCooldown.fillAmount = (SpellToCast.Cooldown - currentCastTimer) / SpellToCast.Cooldown;
+            } else
+            {
+                textCooldown.enabled = false;
+                iconCooldown.enabled = false;
+            } 
+        }
+        if(currentMana < maxMana)
+        {
+            currentManaRechargeTimer += Time.deltaTime;
+            if(currentManaRechargeTimer > timeToWaitForManaRecharge)
+            {
+            currentMana += manaRechargeRate * Time.deltaTime;
+            if(currentMana > maxMana)  currentMana = maxMana;
+            }
+        }
+        // if(shootAction.ReadValue<float>() > 0) CastPrimarySpell();
     }
 
     private void CastPrimarySpell(){
-        if(fireCooldown.IsCoolingDown) return;
         RaycastHit hit;
-        GameObject bullet = GameObject.Instantiate(SpellToCast.SpellPrefab, castPoint.position, castPoint.rotation, bulletParent);
+        GameObject bullet = GameObject.Instantiate(SpellToCast.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, PlayerLayerMask)){
             bulletController.target = hit.point;
@@ -85,39 +113,5 @@ public class SpellCastingController : MonoBehaviour
         }
         // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
         // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
-        fireCooldown.StartCooldown();
-    }
-
-
-    private void SpellCooldown(ref float currentCooldown, float maxCooldown, ref bool isCooldown, Image skillImage, TMP_Text skillText)
-    {
-        if(isCooldown)
-        {
-            currentCooldown -= Time.deltaTime;
-            if(currentCooldown <= 0f)
-            {
-                isCooldown = false;
-                currentCooldown = 0f;
-                if(skillImage != null)
-                {
-                    skillImage.fillAmount = 0f;
-                }
-                if(skillText != null)
-                {
-                    skillText.text = "";
-                }
-            }
-            else
-            {
-                if(skillImage != null)
-                {
-                    skillImage.fillAmount = currentCooldown / maxCooldown;
-                }
-                if(skillText != null)
-                {
-                    skillText.text = Mathf.Ceil(currentCooldown).ToString();
-                }
-            }
-        }
     }
 }

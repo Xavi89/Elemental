@@ -895,7 +895,6 @@ GameObject:
   - component: {fileID: 215968916}
   - component: {fileID: 215968915}
   - component: {fileID: 215968914}
-  - component: {fileID: 215968918}
   - component: {fileID: 215968920}
   - component: {fileID: 215968922}
   - component: {fileID: 215968923}
@@ -1068,29 +1067,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 963194227}
---- !u!114 &215968918
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 215968909}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2f65dcc8b05bacc458503938625ca633, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spellToCast: {fileID: 8972661508025001573, guid: 173817c5a3955b14e91a47d6600f2214, type: 3}
-  currentCastTimer: 0
-  castPoint: {fileID: 1716116269}
-  textCooldown: {fileID: 1045312497}
-  iconCooldown: {fileID: 1119476261}
-  maxMana: 100
-  currentMana: 0
-  manaRechargeRate: 4
-  timeToWaitForManaRecharge: 1
-  manaBarImage: {fileID: 1198081552}
-  manaText: {fileID: 638445615}
 --- !u!81 &215968920
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1112,16 +1088,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: ffc1c7bf9094d6444bee1e2b9ffa3637, type: 2}
-  fireSpellImage: {fileID: 1694779257}
-  fireSpellText: {fileID: 1215558953}
+  spellCooldownImage: {fileID: 1694779257}
+  spellCooldownText: {fileID: 1215558953}
   castPoint: {fileID: 1716116269}
-  bulletParent: {fileID: 1043418224}
+  spellStoreParent: {fileID: 1043418224}
   PlayerLayerMask:
     serializedVersion: 2
     m_Bits: 1
-  fireCooldown:
-    cooldownTime: 0.1
-  fireSpellCooldown: 0.1
+  textCooldown: {fileID: 1215558953}
+  iconCooldown: {fileID: 1694779257}
+  currentCastTimer: 0
+  maxMana: 100
+  currentMana: 0
+  manaRechargeRate: 10
+  timeToWaitForManaRecharge: 1
+  manaBarImage: {fileID: 1198081552}
+  manaText: {fileID: 638445615}
 --- !u!114 &215968923
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2892,7 +2874,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1043418224}
   m_Layer: 0
-  m_Name: BulletParent
+  m_Name: SpellStoreParent
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
