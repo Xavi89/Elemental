@@ -530,7 +530,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2bab19c759afa49488b5021c212db637, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe6ee25278fff5d419a5ce00cdb5e128, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -614,7 +614,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 99197798}
   m_LocalRotation: {x: 0.043619387, y: 0, z: 0, w: 0.99904823}
-  m_LocalPosition: {x: 0.8495122, y: 2.7918024, z: -9.881435}
+  m_LocalPosition: {x: 1.2742686, y: 3.0218642, z: -9.861308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1088,6 +1088,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpellToCast: {fileID: 11400000, guid: 76c9ad15d48911b46a51646ca35f8332, type: 2}
+  SpellToCast2: {fileID: 11400000, guid: ffc1c7bf9094d6444bee1e2b9ffa3637, type: 2}
   castPoint: {fileID: 1716116269}
   spellStoreParent: {fileID: 1043418224}
   PlayerLayerMask:
@@ -1095,11 +1096,14 @@ MonoBehaviour:
     m_Bits: 1
   textCooldown: {fileID: 1215558953}
   iconCooldown: {fileID: 1694779257}
+  textCooldown2: {fileID: 1045312497}
+  iconCooldown2: {fileID: 1119476261}
   currentCastTimer: 0
+  currentCastTimer2: 0
   maxMana: 100
   currentMana: 0
-  manaRechargeRate: 10
-  timeToWaitForManaRecharge: 1
+  manaRechargeRate: 50
+  timeToWaitForManaRecharge: 0
   manaBarImage: {fileID: 1198081552}
   manaText: {fileID: 638445615}
 --- !u!114 &215968923
@@ -1403,8 +1407,8 @@ MonoBehaviour:
   m_YDamping: 0
   m_ZDamping: 0
   m_TargetMovementOnly: 1
-  m_ScreenX: 0.46
-  m_ScreenY: 0.58
+  m_ScreenX: 0.44
+  m_ScreenY: 0.6
   m_CameraDistance: 10
   m_DeadZoneWidth: 0
   m_DeadZoneHeight: 0
@@ -2744,7 +2748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   m_LocalRotation: {x: 0.043619387, y: 0, z: 0, w: 0.99904823}
-  m_LocalPosition: {x: 0.8495122, y: 2.7918024, z: -9.881435}
+  m_LocalPosition: {x: 1.2742686, y: 3.0218642, z: -9.861308}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -3079,7 +3083,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4480,14 +4484,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.2, g: 0.2, b: 0.2, a: 1}
+  m_Color: {r: 0.53333336, g: 0.53333336, b: 0.53333336, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2bab19c759afa49488b5021c212db637, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fe6ee25278fff5d419a5ce00cdb5e128, type: 3}
   m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1

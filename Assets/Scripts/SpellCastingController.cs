@@ -10,6 +10,8 @@ using TMPro;
 public class SpellCastingController : MonoBehaviour
 {
     [SerializeField] public SpellScriptableObject SpellToCast;
+    [SerializeField] public SpellScriptableObject SpellToCast2;
+
    
     [SerializeField] private Transform castPoint;
     [SerializeField] private Transform spellStoreParent;
@@ -20,12 +22,20 @@ public class SpellCastingController : MonoBehaviour
     private Transform cameraTransform;
 
     private InputAction shootAction;
+    private InputAction shootSecondaryAction;
+
     private PlayerMagicSystem manaSystem;
 
     private bool castingMagic = false;
+    private bool castingMagic2 = false;
+
     [SerializeField] private TMP_Text textCooldown;
     [SerializeField] private Image iconCooldown;
+    [SerializeField] private TMP_Text textCooldown2;
+    [SerializeField] private Image iconCooldown2;
     [SerializeField] private float currentCastTimer;
+    [SerializeField] private float currentCastTimer2;
+
     private float currentManaRechargeTimer;
 
     [Header("Mana")]
@@ -42,9 +52,8 @@ public class SpellCastingController : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
         shootAction = playerInput.actions["Shoot"];
+        shootSecondaryAction = playerInput.actions["Spell Cast"];
 
-        textCooldown.text = "";
-        iconCooldown.fillAmount = 0;
         currentMana = maxMana;
 
         Cursor.lockState = CursorLockMode.Locked;
@@ -54,6 +63,8 @@ public class SpellCastingController : MonoBehaviour
     {
         textCooldown.text = "";
         iconCooldown.fillAmount = 0;
+        textCooldown2.text = "";
+        iconCooldown2.fillAmount = 0;
     }
 
     void Update()
@@ -61,7 +72,9 @@ public class SpellCastingController : MonoBehaviour
         manaText.text = currentMana.ToString("F0") + " / " + maxMana.ToString("F0");
         manaBarImage.fillAmount = currentMana/maxMana;
         bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0;
+        bool isSpellCastHeldDown2 = shootSecondaryAction.ReadValue<float>() > 0;
         bool hasEnoughMana = currentMana - SpellToCast.ManaCost >= 0f;
+        bool hasEnoughMana2 = currentMana - SpellToCast2.ManaCost >= 0f;
         if(!castingMagic && isSpellCastHeldDown && hasEnoughMana)
         {
             castingMagic = true;
@@ -69,6 +82,14 @@ public class SpellCastingController : MonoBehaviour
             currentCastTimer = 0;
             currentManaRechargeTimer = 0;
             CastPrimarySpell();
+        }
+        if(!castingMagic2 && isSpellCastHeldDown2 && hasEnoughMana2)
+        {
+            castingMagic2 = true;
+            currentMana -= SpellToCast2.ManaCost;
+            currentCastTimer2 = 0;
+            currentManaRechargeTimer = 0;
+            CastSecondarySpell();
         }
         if(castingMagic)
         {
@@ -79,12 +100,29 @@ public class SpellCastingController : MonoBehaviour
             {
                 textCooldown.enabled = true;
                 iconCooldown.enabled = true;
-                textCooldown.text = (SpellToCast.Cooldown - currentCastTimer).ToString("F1");
+                textCooldown.text = (SpellToCast.Cooldown - currentCastTimer).ToString("F0");
                 iconCooldown.fillAmount = (SpellToCast.Cooldown - currentCastTimer) / SpellToCast.Cooldown;
             } else
             {
                 textCooldown.enabled = false;
                 iconCooldown.enabled = false;
+            } 
+        }
+        if(castingMagic2)
+        {
+            currentCastTimer2 += Time.deltaTime;
+            if(currentCastTimer2 > SpellToCast2.Cooldown) castingMagic2 = false;
+
+            if(SpellToCast2.Cooldown - currentCastTimer2 > 0 )
+            {
+                textCooldown2.enabled = true;
+                iconCooldown2.enabled = true;
+                textCooldown2.text = (SpellToCast2.Cooldown - currentCastTimer2).ToString("F0");
+                iconCooldown2.fillAmount = (SpellToCast2.Cooldown - currentCastTimer2) / SpellToCast2.Cooldown;
+            } else
+            {
+                textCooldown2.enabled = false;
+                iconCooldown2.enabled = false;
             } 
         }
         if(currentMana < maxMana)
@@ -96,7 +134,6 @@ public class SpellCastingController : MonoBehaviour
             if(currentMana > maxMana)  currentMana = maxMana;
             }
         }
-        // if(shootAction.ReadValue<float>() > 0) CastPrimarySpell();
     }
 
     private void CastPrimarySpell(){
@@ -109,6 +146,22 @@ public class SpellCastingController : MonoBehaviour
         }
         else {
             bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast.HitMissLifetime;
+            bulletController.hit = false;
+        }
+        // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
+        // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
+    }
+
+        private void CastSecondarySpell(){
+        RaycastHit hit;
+        GameObject bullet = GameObject.Instantiate(SpellToCast2.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
+        BulletController bulletController = bullet.GetComponent<BulletController>();
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, PlayerLayerMask)){
+            bulletController.target = hit.point;
+            bulletController.hit = true;
+        }
+        else {
+            bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast2.HitMissLifetime;
             bulletController.hit = false;
         }
         // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
