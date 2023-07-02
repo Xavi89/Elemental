@@ -29,10 +29,12 @@ public class SpellCastingController : MonoBehaviour
     private bool castingMagic = false;
     private bool castingMagic2 = false;
 
-    [SerializeField] private TMP_Text textCooldown;
+    [SerializeField] private Image icon;
+    [SerializeField] private Image icon2;
     [SerializeField] private Image iconCooldown;
-    [SerializeField] private TMP_Text textCooldown2;
     [SerializeField] private Image iconCooldown2;
+    [SerializeField] private TMP_Text textCooldown;
+    [SerializeField] private TMP_Text textCooldown2;
     [SerializeField] private float currentCastTimer;
     [SerializeField] private float currentCastTimer2;
 
@@ -62,8 +64,13 @@ public class SpellCastingController : MonoBehaviour
     void Start()
     {
         textCooldown.text = "";
-        iconCooldown.fillAmount = 0;
         textCooldown2.text = "";
+        icon.sprite = SpellToCast.SpellIcon;
+        icon2.sprite = SpellToCast2.SpellIcon;
+        iconCooldown.sprite = SpellToCast.SpellIcon;
+        iconCooldown2.sprite = SpellToCast2.SpellIcon;
+        // iconCooldown.GetComponent<Image>().color = new Color32(255,0,0,100);
+        iconCooldown.fillAmount = 0;
         iconCooldown2.fillAmount = 0;
     }
 

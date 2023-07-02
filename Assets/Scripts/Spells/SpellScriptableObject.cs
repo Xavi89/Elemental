@@ -19,7 +19,7 @@ public class SpellScriptableObject : ScriptableObject
     public AudioClip SpellAudioCast;
     public AudioClip SpellAudioHit;
     public float Cooldown = 1f;
-    public Texture2D SpellIcon = null;
+    public Sprite SpellIcon = null;
     public GameObject SpellPrefab = null;
     public GameObject SpellCollisionParticles = null;
 
