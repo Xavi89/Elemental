@@ -24,5 +24,5 @@ MonoBehaviour:
   SpellAudioHit: {fileID: 8300000, guid: 17701c8261e50d142a7915da633a1f7d, type: 3}
   Cooldown: 2
   SpellIcon: {fileID: 21300000, guid: fe6ee25278fff5d419a5ce00cdb5e128, type: 3}
-  SpellPrefab: {fileID: 7248391995839134062, guid: 040a2dfefe6077b43bfcf262ecac543d, type: 3}
+  SpellPrefab: {fileID: 7248391995839134062, guid: 761b9d3ad5874bd4ab101bf997b9ad6f, type: 3}
   SpellCollisionParticles: {fileID: 4652775306817148758, guid: 4430d84ef1f40454a8b7ee8f50a5add1, type: 3}
