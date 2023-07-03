@@ -155,8 +155,8 @@ public class SpellCastingController : MonoBehaviour
             bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast.HitMissLifetime;
             bulletController.hit = false;
         }
-        // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
-        // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
+        float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
+        iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
     }
 
         private void CastSecondarySpell(){
@@ -171,7 +171,7 @@ public class SpellCastingController : MonoBehaviour
             bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast2.HitMissLifetime;
             bulletController.hit = false;
         }
-        // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
-        // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
+        float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
+        iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
     }
 }

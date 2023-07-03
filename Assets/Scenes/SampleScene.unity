@@ -1087,8 +1087,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd1c29f1009c54e429b5083ef2cc39bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpellToCast: {fileID: 11400000, guid: 76c9ad15d48911b46a51646ca35f8332, type: 2}
-  SpellToCast2: {fileID: 11400000, guid: 4bd0820ddd5b5dc45a9c2eedd9a53b1f, type: 2}
+  SpellToCast: {fileID: 11400000, guid: ffc1c7bf9094d6444bee1e2b9ffa3637, type: 2}
+  SpellToCast2: {fileID: 11400000, guid: 3fcd8703900975647b5e52c3b304b597, type: 2}
   castPoint: {fileID: 1716116269}
   spellStoreParent: {fileID: 1043418224}
   PlayerLayerMask:
