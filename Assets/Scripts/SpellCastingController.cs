@@ -15,7 +15,7 @@ public class SpellCastingController : MonoBehaviour
    
     [SerializeField] private Transform castPoint;
     [SerializeField] private Transform spellStoreParent;
-    [SerializeField] private LayerMask PlayerLayerMask;
+    [SerializeField] private LayerMask hitLayerMask;
     
     private CharacterController controller;
     private PlayerInput playerInput;
@@ -48,6 +48,8 @@ public class SpellCastingController : MonoBehaviour
     [SerializeField] private Image manaBarImage;
     [SerializeField] private TextMeshProUGUI manaText;
 
+    [SerializeField] LineRenderer lineRend;
+
 
     private void Awake()
     {
@@ -76,6 +78,12 @@ public class SpellCastingController : MonoBehaviour
 
     void Update()
     {
+        RaycastHit hit;
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
+            Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
+        }
+        lineRend.SetPosition(0, castPoint.transform.position);
+        lineRend.SetPosition(1, hit.point);
         manaText.text = currentMana.ToString("F0") + " / " + maxMana.ToString("F0");
         manaBarImage.fillAmount = currentMana/maxMana;
         bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0;
@@ -147,7 +155,7 @@ public class SpellCastingController : MonoBehaviour
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(SpellToCast.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
-        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, PlayerLayerMask)){
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
             bulletController.target = hit.point;
             bulletController.hit = true;
         }
@@ -155,15 +163,15 @@ public class SpellCastingController : MonoBehaviour
             bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast.HitMissLifetime;
             bulletController.hit = false;
         }
-        float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
-        iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
+        // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
+        // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
     }
 
         private void CastSecondarySpell(){
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(SpellToCast2.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
         BulletController bulletController = bullet.GetComponent<BulletController>();
-        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, PlayerLayerMask)){
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
             bulletController.target = hit.point;
             bulletController.hit = true;
         }
@@ -171,7 +179,7 @@ public class SpellCastingController : MonoBehaviour
             bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast2.HitMissLifetime;
             bulletController.hit = false;
         }
-        float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
-        iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
+        // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
+        // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
     }
 }

@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: -3443107020836150368}
   - component: {fileID: 1124476843256828529}
   - component: {fileID: 7929205281783871426}
-  - component: {fileID: 6425068058237879474}
+  - component: {fileID: 8004923637394806015}
   m_Layer: 2
   m_Name: Bullet_Icelance
   m_TagString: Untagged
@@ -5043,8 +5043,8 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
---- !u!135 &6425068058237879474
-SphereCollider:
+--- !u!65 &8004923637394806015
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -5062,8 +5062,8 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 0.43
-  m_Center: {x: 0, y: 0, z: 1.35}
+  m_Size: {x: 4.16, y: 5.37, z: 3.3}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &8558718238719620557
 GameObject:
   m_ObjectHideFlags: 0

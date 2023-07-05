@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 933fa69c82909de44b6a636556335402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spellToCast: {fileID: 3962851354988464171, guid: 540160b45c8809a4ba51b32faca3409e, type: 3}
+  spellToCast: {fileID: 3962851354988464171, guid: 5d9c8ac04d412fe468e32db6f5590c5d, type: 3}
   currentCastTimer: 0
   castPoint: {fileID: 2037535671}
   textCooldown: {fileID: 0}
