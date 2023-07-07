@@ -26,3 +26,4 @@ MonoBehaviour:
   SpellIcon: {fileID: 21300000, guid: 2bab19c759afa49488b5021c212db637, type: 3}
   SpellPrefab: {fileID: 7248391995839134062, guid: 977ffa916a5737649b8ea0b53b158d45, type: 3}
   SpellCollisionParticles: {fileID: 4652775306817148758, guid: 4430d84ef1f40454a8b7ee8f50a5add1, type: 3}
+  CastPoint: {x: 0, y: 2, z: 0.5}

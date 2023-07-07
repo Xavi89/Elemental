@@ -154,14 +154,14 @@ public class SpellCastingController : MonoBehaviour
     private void CastPrimarySpell(){
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(SpellToCast.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
-        BulletController bulletController = bullet.GetComponent<BulletController>();
+        SpellController spellController = bullet.GetComponent<SpellController>();
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
-            bulletController.target = hit.point;
-            bulletController.hit = true;
+            spellController.target = hit.point;
+            spellController.hit = true;
         }
         else {
-            bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast.HitMissLifetime;
-            bulletController.hit = false;
+            spellController.target = cameraTransform.position + cameraTransform.forward * SpellToCast.HitMissLifetime;
+            spellController.hit = false;
         }
         // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
         // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);
@@ -170,14 +170,14 @@ public class SpellCastingController : MonoBehaviour
         private void CastSecondarySpell(){
         RaycastHit hit;
         GameObject bullet = GameObject.Instantiate(SpellToCast2.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
-        BulletController bulletController = bullet.GetComponent<BulletController>();
+        SpellController spellController = bullet.GetComponent<SpellController>();
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
-            bulletController.target = hit.point;
-            bulletController.hit = true;
+            spellController.target = hit.point;
+            spellController.hit = true;
         }
         else {
-            bulletController.target = cameraTransform.position + cameraTransform.forward * SpellToCast2.HitMissLifetime;
-            bulletController.hit = false;
+            spellController.target = cameraTransform.position + cameraTransform.forward * SpellToCast2.HitMissLifetime;
+            spellController.hit = false;
         }
         // float iTweenDistance = Vector3.Distance(hit.point, castPoint.transform.position);
         // iTween.PunchPosition(bullet, new Vector3 (0, iTweenDistance/20, 0), iTweenDistance/5);

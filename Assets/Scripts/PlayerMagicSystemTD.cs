@@ -18,8 +18,8 @@ public class PlayerMagicSystemTD : MonoBehaviour
     [Header("Mana")]
     [SerializeField] private float maxMana = 100f;
     [SerializeField] public float currentMana;
-    [SerializeField] private float manaRechargeRate = 10f;
-    [SerializeField] private float timeToWaitForManaRecharge = 1f;
+    // [SerializeField] private float manaRechargeRate = 10f;
+    // [SerializeField] private float timeToWaitForManaRecharge = 1f;
     [SerializeField] private Image manaBarImage;
     [SerializeField] private TextMeshProUGUI manaText;
 

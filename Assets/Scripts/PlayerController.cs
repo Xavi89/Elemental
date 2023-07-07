@@ -12,23 +12,27 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float rotationSpeed = 50f;
 
     private CharacterController controller;
-    private PlayerInput playerInput;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Transform cameraTransform;
 
+    private PlayerInput playerInput;
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction shootAction;
+    private InputAction dashAction;
+
 
     private void Awake()
     {
         controller = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
         cameraTransform = Camera.main.transform;
+
+        playerInput = GetComponent<PlayerInput>();
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         shootAction = playerInput.actions["Shoot"];
+        dashAction = playerInput.actions["Dash"];
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -60,5 +64,15 @@ public class PlayerController : MonoBehaviour
         // Rotates towards camera direction.
         Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+        Dash();
+    }
+
+    private void Dash()
+    {
+        if(dashAction.IsPressed())
+        {
+            Debug.Log("You dashed!!!");
+        }
     }
 }
