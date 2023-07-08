@@ -804,8 +804,7 @@ Transform:
   m_LocalPosition: {x: 0.7, y: 0.11, z: 0.1}
   m_LocalScale: {x: 0.36, y: 0.33, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1716116269}
+  m_Children: []
   m_Father: {fileID: 215968910}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1014,9 +1013,7 @@ MonoBehaviour:
   jumpHeight: 1.5
   gravityValue: -40
   rotationSpeed: 50
-  dashSpeed: 20
-  dashTime: 1
-  controller: {fileID: 0}
+  controller: {fileID: 215968915}
   move: {x: 0, y: 0, z: 0}
 --- !u!143 &215968915
 CharacterController:
@@ -1057,7 +1054,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: bca3386e5aaa27c41a15595c68bdc7b8, type: 3}
-  m_NotificationBehavior: 0
+  m_NotificationBehavior: 2
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -1068,7 +1065,31 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 867f3a3d-bfeb-4a1c-962a-57ac0f1e2557
+    m_ActionName: Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e3f5f81d-3c6c-4a37-b0ca-d508632fdd43
+    m_ActionName: Player/Look[/Mouse/delta]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 738fd4e7-977a-4717-b058-e30b449e80fe
+    m_ActionName: Player/Jump[/Keyboard/space]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f1c11cb6-92e0-4ed1-a5f8-40cd489a774a
+    m_ActionName: Player/Shoot[/Mouse/leftButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b956cc00-322a-4225-9eed-607900f4b731
+    m_ActionName: Player/Spell Cast[/Mouse/rightButton]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: fb279464-b523-453c-a73d-8167445c18cc
+    m_ActionName: Player/Dash[/Keyboard/leftShift]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -1259,8 +1280,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 884164d06624ef24d8afab5098d84b09, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dashSpeed: 20
-  dashTime: 0.05
+  dashSpeed: 50
+  dashTime: 0.1
+  dashCooldown: 3
+  dashCooldownTimer: 0
 --- !u!1 &219598495
 GameObject:
   m_ObjectHideFlags: 0
@@ -9727,37 +9750,6 @@ Transform:
   - {fileID: 313433011}
   m_Father: {fileID: 0}
   m_RootOrder: 13
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1716116268
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1716116269}
-  m_Layer: 8
-  m_Name: Barrel
-  m_TagString: Player
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1716116269
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1716116268}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.02, y: -0.02, z: 0.54}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 166221143}
-  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1742581328
 GameObject:
