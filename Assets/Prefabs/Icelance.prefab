@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 7929205281783871426}
   - component: {fileID: 8004923637394806015}
   m_Layer: 2
-  m_Name: Bullet_Icelance
+  m_Name: Icelance
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

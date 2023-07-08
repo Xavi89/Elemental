@@ -78,12 +78,12 @@ public class SpellCastingController : MonoBehaviour
 
     void Update()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
-            Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
-        }
-        lineRend.SetPosition(0, castPoint.transform.position);
-        lineRend.SetPosition(1, hit.point);
+        // RaycastHit hit;
+        // if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
+        //     Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
+        // }
+        // lineRend.SetPosition(0, castPoint.transform.position);
+        // lineRend.SetPosition(1, hit.point);
         manaText.text = currentMana.ToString("F0") + " / " + maxMana.ToString("F0");
         manaBarImage.fillAmount = currentMana/maxMana;
         bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0;
@@ -94,9 +94,12 @@ public class SpellCastingController : MonoBehaviour
         {
             castingMagic = true;
             currentMana -= SpellToCast.ManaCost;
-            currentCastTimer = 0;
             currentManaRechargeTimer = 0;
-            CastPrimarySpell();
+            GameObject precastParticles = GameObject.Instantiate(SpellToCast.PreCast, castPoint.position, castPoint.rotation, spellStoreParent);
+            precastParticles.transform.SetParent(castPoint);
+            Destroy(precastParticles, SpellToCast.CastingTime);
+            Invoke("CastPrimarySpell", SpellToCast.CastingTime);
+            currentCastTimer = 0;
         }
         if(!castingMagic2 && isSpellCastHeldDown2 && hasEnoughMana2)
         {
@@ -104,7 +107,11 @@ public class SpellCastingController : MonoBehaviour
             currentMana -= SpellToCast2.ManaCost;
             currentCastTimer2 = 0;
             currentManaRechargeTimer = 0;
-            CastSecondarySpell();
+            GameObject precastParticles2 = GameObject.Instantiate(SpellToCast2.PreCast, castPoint.position, castPoint.rotation, spellStoreParent);
+            precastParticles2.transform.SetParent(castPoint);
+            Destroy(precastParticles2, SpellToCast2.CastingTime);
+            Invoke("CastSecondarySpell", SpellToCast2.CastingTime);
+            currentCastTimer = 0;
         }
         if(castingMagic)
         {
@@ -153,7 +160,7 @@ public class SpellCastingController : MonoBehaviour
 
     private void CastPrimarySpell(){
         RaycastHit hit;
-        GameObject bullet = GameObject.Instantiate(SpellToCast.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
+        GameObject bullet = GameObject.Instantiate(SpellToCast.Projectile, castPoint.position, castPoint.rotation, spellStoreParent);
         SpellController spellController = bullet.GetComponent<SpellController>();
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
             spellController.target = hit.point;
@@ -169,7 +176,7 @@ public class SpellCastingController : MonoBehaviour
 
         private void CastSecondarySpell(){
         RaycastHit hit;
-        GameObject bullet = GameObject.Instantiate(SpellToCast2.SpellPrefab, castPoint.position, castPoint.rotation, spellStoreParent);
+        GameObject bullet = GameObject.Instantiate(SpellToCast2.Projectile, castPoint.position, castPoint.rotation, spellStoreParent);
         SpellController spellController = bullet.GetComponent<SpellController>();
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
             spellController.target = hit.point;

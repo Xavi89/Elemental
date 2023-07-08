@@ -29,7 +29,7 @@ public class SpellController : MonoBehaviour
             if(SpellToCast.DamageAmount > 0) enemyHealth.TakeDamage(SpellToCast.DamageAmount);
         }
         ContactPoint contact = other.GetContact(0);
-        var spellCollision = Instantiate(SpellToCast.SpellCollisionParticles, contact.point + contact.normal * 0.001f, Quaternion.LookRotation(contact.normal));
+        var spellCollision = Instantiate(SpellToCast.Collision, contact.point + contact.normal * 0.001f, Quaternion.LookRotation(contact.normal));
         Destroy(spellCollision, 1f);
         Destroy(gameObject);
     }

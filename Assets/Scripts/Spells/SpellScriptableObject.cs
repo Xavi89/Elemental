@@ -20,8 +20,9 @@ public class SpellScriptableObject : ScriptableObject
     public AudioClip SpellAudioHit;
     public float Cooldown = 1f;
     public Sprite SpellIcon = null;
-    public GameObject SpellPrefab = null;
-    public GameObject SpellCollisionParticles = null;
+    public GameObject Projectile = null;
+    public GameObject Collision = null;
+    public GameObject PreCast = null;
 
     // Element School
     // Status effect

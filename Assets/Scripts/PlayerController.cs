@@ -1,17 +1,18 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using System.Collections;
 
 [RequireComponent(typeof(CharacterController), typeof(PlayerInput))]
 
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] private float playerSpeed = 10f;
-    [SerializeField] private float jumpHeight = 1.0f;
-    [SerializeField] private float gravityValue = -9.81f;
+    [SerializeField] private float jumpHeight = 1.5f;
+    [SerializeField] private float gravityValue = -40f;
     [SerializeField] private float rotationSpeed = 50f;
 
-    private CharacterController controller;
+    public CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     private Transform cameraTransform;
@@ -20,7 +21,8 @@ public class PlayerController : MonoBehaviour
     private InputAction moveAction;
     private InputAction jumpAction;
     private InputAction shootAction;
-    private InputAction dashAction;
+
+    public Vector3 move;
 
 
     private void Awake()
@@ -32,7 +34,6 @@ public class PlayerController : MonoBehaviour
         moveAction = playerInput.actions["Move"];
         jumpAction = playerInput.actions["Jump"];
         shootAction = playerInput.actions["Shoot"];
-        dashAction = playerInput.actions["Dash"];
 
         Cursor.lockState = CursorLockMode.Locked;
     }
@@ -46,7 +47,7 @@ public class PlayerController : MonoBehaviour
         }
 
         Vector2 input = moveAction.ReadValue<Vector2>();
-        Vector3 move = new Vector3(input.x, 0, input.y);
+        move = new Vector3(input.x, 0, input.y);
         move = move.x * cameraTransform.right.normalized + move.z * cameraTransform.forward.normalized;
         move.y = 0f;
         controller.Move(move * Time.deltaTime * playerSpeed);
@@ -64,15 +65,5 @@ public class PlayerController : MonoBehaviour
         // Rotates towards camera direction.
         Quaternion targetRotation = Quaternion.Euler(0, cameraTransform.eulerAngles.y, 0);
         transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-        Dash();
-    }
-
-    private void Dash()
-    {
-        if(dashAction.IsPressed())
-        {
-            Debug.Log("You dashed!!!");
-        }
     }
 }
