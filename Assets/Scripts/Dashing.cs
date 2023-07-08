@@ -60,7 +60,7 @@ public class Dashing : MonoBehaviour
             {
                 moveScript.controller.Move(transform.forward * dashSpeed * Time.deltaTime);
             }
-        yield return null;
+            yield return null;
         }
     }
 }
