@@ -9521,7 +9521,7 @@ Rigidbody:
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
-  m_Interpolate: 1
+  m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 2
 --- !u!1 &1694779255
@@ -10702,7 +10702,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f34f5d961de1de149acff42de35c8a15, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHealth: 40
+  MaxHealth: 400
   healthBarImage: {fileID: 1398478735}
   onHitMaterial: {fileID: 2100000, guid: 8856bdc0f4e174a49bbc159dbf0464f5, type: 2}
   energyPrefab: {fileID: 7822945139411465712, guid: 4180ca63a384ce0469528faf5a6a5b7b, type: 3}

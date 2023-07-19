@@ -78,12 +78,12 @@ public class SpellCastingController : MonoBehaviour
 
     void Update()
     {
-        // RaycastHit hit;
-        // if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
-        //     Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
-        // }
-        // lineRend.SetPosition(0, castPoint.transform.position);
-        // lineRend.SetPosition(1, hit.point);
+        RaycastHit hit;
+        if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
+            Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
+        }
+        lineRend.SetPosition(0, castPoint.transform.position);
+        lineRend.SetPosition(1, hit.point);
         manaText.text = currentMana.ToString("F0") + " / " + maxMana.ToString("F0");
         manaBarImage.fillAmount = currentMana/maxMana;
         bool isSpellCastHeldDown = shootAction.ReadValue<float>() > 0;
