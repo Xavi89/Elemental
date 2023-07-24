@@ -23,7 +23,6 @@ public class SpellScriptableObject : ScriptableObject
     public GameObject Projectile = null;
     public GameObject Collision = null;
     public GameObject PreCast = null;
-
     // Element School
     // Status effect
 }
