@@ -80,7 +80,7 @@ public class SpellCastingController : MonoBehaviour
     {
         RaycastHit hit;
         if(Physics.Raycast(cameraTransform.position, cameraTransform.forward, out hit, Mathf.Infinity, hitLayerMask)){
-            Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
+            // Debug.DrawRay(castPoint.transform.position, hit.point, Color.green);
         }
         lineRend.SetPosition(0, castPoint.transform.position);
         lineRend.SetPosition(1, hit.point);

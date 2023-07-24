@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
+using TMPro;
+
 
 [RequireComponent(typeof(PlayerInput))]
 
@@ -11,44 +14,76 @@ public class Dashing : MonoBehaviour
     [SerializeField] private float dashSpeed = 20f;
     [SerializeField] private float dashTime = .05f;
     [SerializeField] private float dashCooldown = 3f;
-    [SerializeField] private float dashCooldownTimer;
+    [SerializeField] private float dashCooldownTimer = 0;
+    [SerializeField] private int dashCharges = 0;
+    [SerializeField] private int maxDashCharges = 3;
+
+    [SerializeField] private Image iconCD;
+    [SerializeField] private Image chargesCD;
+
+    [SerializeField] private TextMeshProUGUI iconCDText;
+    [SerializeField] private TextMeshProUGUI chargesText;
+    [SerializeField] private ParticleSystem dashParticles;
+    [SerializeField] private TrailRenderer dashTrail;
+
+
 
     private PlayerInput playerInput;
     private InputAction dashAction;
 
     private bool canDash;
 
-
     private void Awake() {
         playerInput = GetComponent<PlayerInput>();
         dashAction = playerInput.actions["Dash"];
+        iconCD.fillAmount = 1;
+        dashCharges = maxDashCharges;
     }
 
     private void Start() {
         moveScript = GetComponent<PlayerController>();
-        canDash = true;
-        dashCooldownTimer = dashCooldown;
+        dashParticles = GameObject.Find("Dash Lines").GetComponent<ParticleSystem>();
+        dashParticles.Stop();
+        dashTrail = GameObject.Find("Dash Trail Renderer").GetComponent<TrailRenderer>();
+        dashTrail.emitting = false;
     }
 
     void Update() {
-        if(dashCooldownTimer >= dashCooldown) canDash = true;
-        else{
-            canDash = false;
+        chargesCD.fillAmount = dashCooldownTimer/dashCooldown;
+        if(dashCharges < maxDashCharges){
             dashCooldownTimer += Time.deltaTime;
-            dashCooldownTimer = Mathf.Clamp(dashCooldownTimer, 0f, dashCooldown);
+            if(dashCooldownTimer >= dashCooldown){
+                dashCooldownTimer = 0;
+                dashCharges += 1;
+            }
         }
-        bool isDashing = dashAction.ReadValue<float>() > 0f;
-        if(isDashing && canDash)
+        if(dashCharges > 0){
+            canDash = true;
+        } else canDash = false;
+
+        if(canDash && dashAction.triggered)
         {
             StartCoroutine(Dash());
-            canDash = false;
-            dashCooldownTimer = 0;
+            dashCharges -=1;
+        }
+        if(dashCharges < 1){
+            iconCD.fillAmount = dashCooldownTimer/dashCooldown;
+            chargesText.enabled = false;
+            iconCDText.enabled = true;
+            iconCDText.text = (dashCooldown - dashCooldownTimer).ToString("F0");
+        }
+        if(dashCharges >= 1){
+            chargesText.enabled = true;
+            chargesText.text = dashCharges.ToString();
+            iconCDText.enabled = false;
         }
     }
 
 
     IEnumerator Dash()
     {
+        dashParticles.Play();
+        dashTrail.emitting = true;
         float startTime = Time.time;
         while (Time.time < startTime + dashTime)
         {
@@ -62,5 +97,7 @@ public class Dashing : MonoBehaviour
             }
             yield return null;
         }
+        dashParticles.Stop();
+        dashTrail.emitting = false;
     }
 }
